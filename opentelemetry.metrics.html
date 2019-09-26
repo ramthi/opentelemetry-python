@@ -1,0 +1,519 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.metrics package &mdash; OpenTelemetry  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="opentelemetry.metrics.handle module" href="opentelemetry.metrics.handle.html" />
+    <link rel="prev" title="opentelemetry.context.base_context module" href="opentelemetry.context.base_context.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OpenTelemetry
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.context.html">opentelemetry.context package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">opentelemetry.metrics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opentelemetry.metrics.handle.html">opentelemetry.metrics.handle module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-opentelemetry.metrics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.trace.html">opentelemetry.trace package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.util.loader.html">opentelemetry.util.loader module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenTelemetry</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>opentelemetry.metrics package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/opentelemetry.metrics.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opentelemetry-metrics-package">
+<h1>opentelemetry.metrics package<a class="headerlink" href="#opentelemetry-metrics-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.metrics.handle.html">opentelemetry.metrics.handle module</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-opentelemetry.metrics">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opentelemetry.metrics" title="Permalink to this headline">¶</a></h2>
+<p>The OpenTelemetry metrics API describes the classes used to report raw
+measurements, as well as metrics with known aggregation and labels.</p>
+<p>The <a class="reference internal" href="#opentelemetry.metrics.Meter" title="opentelemetry.metrics.Meter"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Meter</span></code></a> class is used to construct <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> s to record raw statistics
+as well as metrics with predefined aggregation.</p>
+<p>See the <a class="reference external" href="https://github.com/open-telemetry/opentelemetry-specification/blob/master/specification/api-metrics.md">metrics api</a> spec for terminology and context clarification.</p>
+<dl class="class">
+<dt id="opentelemetry.metrics.Meter">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">Meter</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#Meter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.Meter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>An interface to allow the recording of metrics.</p>
+<p><a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> s are used for recording pre-defined aggregation (gauge and
+counter), or raw values (measure) in which the aggregation and labels
+for the exported metric are deferred.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.Meter.record_batch">
+<code class="sig-name descname">record_batch</code><span class="sig-paren">(</span><em class="sig-param">label_tuples</em>, <em class="sig-param">record_tuples</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#Meter.record_batch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.Meter.record_batch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atomically records a batch of <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> and value pairs.</p>
+<p>Allows the functionality of acting upon multiple metrics with
+a single API call. Implementations should find handles that match
+the key-value pairs in the label tuples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label_tuples</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – A collection of key value pairs that will be matched
+against to record for the metric-handle that has those labels.</p></li>
+<li><p><strong>record_tuples</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]]) – A list of pairs of <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a> s and the
+corresponding value to record for that metric.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="opentelemetry.metrics.create_counter">
+<code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">create_counter</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">is_bidirectional=False</em>, <em class="sig-param">label_keys=None</em>, <em class="sig-param">span_context=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#create_counter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.create_counter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a counter metric with type value_type.</p>
+<p>By default, counter values can only go up (unidirectional). The API
+should reject negative inputs to unidirectional counter metrics.
+Counter metrics have a bidirectional option to allow for negative
+inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the counter.</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Human readable description of the metric.</p></li>
+<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Unit of the metric values.</p></li>
+<li><p><strong>value_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]) – The type of values being recorded by the metric.</p></li>
+<li><p><strong>is_bidirectional</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Set to true to allow negative inputs.</p></li>
+<li><p><strong>label_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – list of keys for the labels with dynamic values.
+Order of the list is important as the same order must be used
+on recording when suppling values for these labels.</p></li>
+<li><p><strong>span_context</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.SpanContext" title="opentelemetry.trace.SpanContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpanContext</span></code></a>]) – The <a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.SpanContext" title="opentelemetry.trace.SpanContext"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SpanContext</span></code></a> that identifies the <a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.Span" title="opentelemetry.trace.Span"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Span</span></code></a>
+that the metric is associated with.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns: A new counter metric for values of the given value_type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#opentelemetry.metrics.FloatCounter" title="opentelemetry.metrics.FloatCounter"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatCounter</span></code></a>, <a class="reference internal" href="#opentelemetry.metrics.IntCounter" title="opentelemetry.metrics.IntCounter"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntCounter</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="opentelemetry.metrics.create_gauge">
+<code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">create_gauge</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">is_unidirectional=False</em>, <em class="sig-param">label_keys=None</em>, <em class="sig-param">span_context=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#create_gauge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.create_gauge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a gauge metric with type value_type.</p>
+<p>By default, gauge values can go both up and down (bidirectional). The API
+allows for an optional unidirectional flag, in which when set will reject
+descending update values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the gauge.</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Human readable description of the metric.</p></li>
+<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Unit of the metric values.</p></li>
+<li><p><strong>value_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]) – The type of values being recorded by the metric.</p></li>
+<li><p><strong>is_unidirectional</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Set to true to reject negative inputs.</p></li>
+<li><p><strong>label_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – list of keys for the labels with dynamic values.
+Order of the list is important as the same order must be used
+on recording when suppling values for these labels.</p></li>
+<li><p><strong>span_context</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.SpanContext" title="opentelemetry.trace.SpanContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpanContext</span></code></a>]) – The <a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.SpanContext" title="opentelemetry.trace.SpanContext"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SpanContext</span></code></a> that identifies the <a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.Span" title="opentelemetry.trace.Span"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Span</span></code></a>
+that the metric is associated with.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns: A new gauge metric for values of the given value_type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#opentelemetry.metrics.FloatGauge" title="opentelemetry.metrics.FloatGauge"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatGauge</span></code></a>, <a class="reference internal" href="#opentelemetry.metrics.IntGauge" title="opentelemetry.metrics.IntGauge"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntGauge</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="opentelemetry.metrics.create_measure">
+<code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">create_measure</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">description</em>, <em class="sig-param">unit</em>, <em class="sig-param">value_type</em>, <em class="sig-param">is_non_negative=False</em>, <em class="sig-param">label_keys=None</em>, <em class="sig-param">span_context=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#create_measure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.create_measure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a measure metric with type value_type.</p>
+<p>Measure metrics represent raw statistics that are recorded. As an option,
+measure metrics can be declared as non-negative. The API will reject
+negative metric events for non-negative measures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name of the measure.</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Human readable description of the metric.</p></li>
+<li><p><strong>unit</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Unit of the metric values.</p></li>
+<li><p><strong>value_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]]) – The type of values being recorded by the metric.</p></li>
+<li><p><strong>is_non_negative</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Set to true to reject negative inputs.</p></li>
+<li><p><strong>label_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]]) – list of keys for the labels with dynamic values.
+Order of the list is important as the same order must be used
+on recording when suppling values for these labels.</p></li>
+<li><p><strong>span_context</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.SpanContext" title="opentelemetry.trace.SpanContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">SpanContext</span></code></a>]) – The <a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.SpanContext" title="opentelemetry.trace.SpanContext"><code class="xref any py py-class docutils literal notranslate"><span class="pre">SpanContext</span></code></a> that identifies the <a class="reference internal" href="opentelemetry.trace.html#opentelemetry.trace.Span" title="opentelemetry.trace.Span"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Span</span></code></a>
+that the metric is associated with.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns: A new measure metric for values of the given value_type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.7)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference internal" href="#opentelemetry.metrics.FloatMeasure" title="opentelemetry.metrics.FloatMeasure"><code class="xref py py-class docutils literal notranslate"><span class="pre">FloatMeasure</span></code></a>, <a class="reference internal" href="#opentelemetry.metrics.IntMeasure" title="opentelemetry.metrics.IntMeasure"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntMeasure</span></code></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.metrics.Metric">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">Metric</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#Metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.Metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Base class for various types of metrics.</p>
+<p>Metric class that inherit from this class are specialized with the type of
+time series that the metric holds.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.Metric.get_handle">
+<em class="property">abstract </em><code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#Metric.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.Metric.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a handle, used for repeated-use of metrics instruments.</p>
+<p>Handles are useful to reduce the cost of repeatedly recording a metric
+with a pre-defined set of label values. All metric kinds (counter,
+gauge, measure) support declaring a set of required label keys. The
+values corresponding to these keys should be specified in every handle.
+“Unspecified” label values, in cases where a handle is requested but
+a value was not provided are permitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>label_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – A list of label values that will be associated
+with the return handle.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.metrics.Metric.remove_handle">
+<code class="sig-name descname">remove_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#Metric.remove_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.Metric.remove_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the handle from the Metric, if present.</p>
+<p>The handle with matching label values will be removed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>label_values</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.7)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – The list of label values to match against.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="opentelemetry.metrics.Metric.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#Metric.clear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.Metric.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes all handles from the <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref any py py-class docutils literal notranslate"><span class="pre">Metric</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.metrics.FloatCounter">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">FloatCounter</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#FloatCounter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.FloatCounter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a></p>
+<p>A counter type metric that holds float values.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.FloatCounter.get_handle">
+<code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#FloatCounter.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.FloatCounter.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a <a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.CounterHandle" title="opentelemetry.metrics.handle.CounterHandle"><code class="xref any py py-class docutils literal notranslate"><span class="pre">CounterHandle</span></code></a> with a float value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.CounterHandle" title="opentelemetry.metrics.handle.CounterHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">CounterHandle</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.metrics.IntCounter">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">IntCounter</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#IntCounter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.IntCounter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a></p>
+<p>A counter type metric that holds int values.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.IntCounter.get_handle">
+<code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#IntCounter.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.IntCounter.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a <a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.CounterHandle" title="opentelemetry.metrics.handle.CounterHandle"><code class="xref any py py-class docutils literal notranslate"><span class="pre">CounterHandle</span></code></a> with an int value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.CounterHandle" title="opentelemetry.metrics.handle.CounterHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">CounterHandle</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.metrics.FloatGauge">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">FloatGauge</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#FloatGauge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.FloatGauge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a></p>
+<p>A gauge type metric that holds float values.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.FloatGauge.get_handle">
+<code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#FloatGauge.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.FloatGauge.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a <a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.GaugeHandle" title="opentelemetry.metrics.handle.GaugeHandle"><code class="xref any py py-class docutils literal notranslate"><span class="pre">GaugeHandle</span></code></a> with a float value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.GaugeHandle" title="opentelemetry.metrics.handle.GaugeHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaugeHandle</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.metrics.IntGauge">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">IntGauge</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#IntGauge"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.IntGauge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a></p>
+<p>A gauge type metric that holds int values.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.IntGauge.get_handle">
+<code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#IntGauge.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.IntGauge.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a <a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.GaugeHandle" title="opentelemetry.metrics.handle.GaugeHandle"><code class="xref any py py-class docutils literal notranslate"><span class="pre">GaugeHandle</span></code></a> with an int value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.GaugeHandle" title="opentelemetry.metrics.handle.GaugeHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">GaugeHandle</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.metrics.FloatMeasure">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">FloatMeasure</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#FloatMeasure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.FloatMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a></p>
+<p>A measure type metric that holds float values.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.FloatMeasure.get_handle">
+<code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#FloatMeasure.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.FloatMeasure.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a <a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.MeasureHandle" title="opentelemetry.metrics.handle.MeasureHandle"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MeasureHandle</span></code></a> with a float value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.MeasureHandle" title="opentelemetry.metrics.handle.MeasureHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeasureHandle</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="opentelemetry.metrics.IntMeasure">
+<em class="property">class </em><code class="sig-prename descclassname">opentelemetry.metrics.</code><code class="sig-name descname">IntMeasure</code><a class="reference internal" href="_modules/opentelemetry/metrics.html#IntMeasure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.IntMeasure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#opentelemetry.metrics.Metric" title="opentelemetry.metrics.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">opentelemetry.metrics.Metric</span></code></a></p>
+<p>A measure type metric that holds int values.</p>
+<dl class="method">
+<dt id="opentelemetry.metrics.IntMeasure.get_handle">
+<code class="sig-name descname">get_handle</code><span class="sig-paren">(</span><em class="sig-param">label_values</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/opentelemetry/metrics.html#IntMeasure.get_handle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#opentelemetry.metrics.IntMeasure.get_handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a <a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.MeasureHandle" title="opentelemetry.metrics.handle.MeasureHandle"><code class="xref any py py-class docutils literal notranslate"><span class="pre">MeasureHandle</span></code></a> with an int value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="opentelemetry.metrics.handle.html#opentelemetry.metrics.handle.MeasureHandle" title="opentelemetry.metrics.handle.MeasureHandle"><code class="xref py py-class docutils literal notranslate"><span class="pre">MeasureHandle</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="opentelemetry.metrics.handle.html" class="btn btn-neutral float-right" title="opentelemetry.metrics.handle module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="opentelemetry.context.base_context.html" class="btn btn-neutral float-left" title="opentelemetry.context.base_context module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, OpenTelemetry Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

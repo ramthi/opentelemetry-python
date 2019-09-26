@@ -1,0 +1,346 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.context package &mdash; OpenTelemetry  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="opentelemetry.context.base_context module" href="opentelemetry.context.base_context.html" />
+    <link rel="prev" title="OpenTelemetry API" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OpenTelemetry
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">opentelemetry.context package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="opentelemetry.context.base_context.html">opentelemetry.context.base_context module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-opentelemetry.context">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.metrics.html">opentelemetry.metrics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.trace.html">opentelemetry.trace package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.util.loader.html">opentelemetry.util.loader module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OpenTelemetry</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>opentelemetry.context package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/opentelemetry.context.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="opentelemetry-context-package">
+<h1>opentelemetry.context package<a class="headerlink" href="#opentelemetry-context-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="opentelemetry.context.base_context.html">opentelemetry.context.base_context module</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-opentelemetry.context">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-opentelemetry.context" title="Permalink to this headline">¶</a></h2>
+<p>The OpenTelemetry context module provides abstraction layer on top of
+thread-local storage and contextvars. The long term direction is to switch to
+contextvars provided by the Python runtime library.</p>
+<p>A global object <code class="docutils literal notranslate"><span class="pre">Context</span></code> is provided to access all the context related
+functionalities:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">opentelemetry.context</span> <span class="k">import</span> <span class="n">Context</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Context</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Context</span><span class="o">.</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Context</span><span class="o">.</span><span class="n">foo</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>When explicit thread is used, a helper function
+<code class="docutils literal notranslate"><span class="pre">Context.with_current_context</span></code> can be used to carry the context across
+threads:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">threading</span> <span class="k">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.context</span> <span class="k">import</span> <span class="n">Context</span>
+
+<span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Entering worker:&#39;</span><span class="p">,</span> <span class="n">Context</span><span class="p">)</span>
+    <span class="n">Context</span><span class="o">.</span><span class="n">operation_id</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting worker:&#39;</span><span class="p">,</span> <span class="n">Context</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Main thread:&#39;</span><span class="p">,</span> <span class="n">Context</span><span class="p">)</span>
+    <span class="n">Context</span><span class="o">.</span><span class="n">operation_id</span> <span class="o">=</span> <span class="s1">&#39;main&#39;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Main thread:&#39;</span><span class="p">,</span> <span class="n">Context</span><span class="p">)</span>
+
+    <span class="c1"># by default context is not propagated to worker thread</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">work</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,))</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Main thread:&#39;</span><span class="p">,</span> <span class="n">Context</span><span class="p">)</span>
+
+    <span class="c1"># user can propagate context explicitly</span>
+    <span class="n">thread</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span>
+        <span class="n">target</span><span class="o">=</span><span class="n">Context</span><span class="o">.</span><span class="n">with_current_context</span><span class="p">(</span><span class="n">work</span><span class="p">),</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">,),</span>
+    <span class="p">)</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Main thread:&#39;</span><span class="p">,</span> <span class="n">Context</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here goes another example using thread pool:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="kn">from</span> <span class="nn">multiprocessing.dummy</span> <span class="k">import</span> <span class="n">Pool</span> <span class="k">as</span> <span class="n">ThreadPool</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.context</span> <span class="k">import</span> <span class="n">Context</span>
+
+<span class="n">_console_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">println</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">_console_lock</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">work</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">println</span><span class="p">(</span><span class="s1">&#39;Entering worker[</span><span class="si">{}</span><span class="s1">]: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">Context</span><span class="p">))</span>
+    <span class="n">Context</span><span class="o">.</span><span class="n">operation_id</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="n">println</span><span class="p">(</span><span class="s1">&#39;Exiting worker[</span><span class="si">{}</span><span class="s1">]: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">Context</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">println</span><span class="p">(</span><span class="s1">&#39;Main thread: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Context</span><span class="p">))</span>
+    <span class="n">Context</span><span class="o">.</span><span class="n">operation_id</span> <span class="o">=</span> <span class="s1">&#39;main&#39;</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">ThreadPool</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># create a thread pool with 2 threads</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">Context</span><span class="o">.</span><span class="n">with_current_context</span><span class="p">(</span><span class="n">work</span><span class="p">),</span> <span class="p">[</span>
+        <span class="s1">&#39;bear&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cat&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;dog&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;horse&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;rabbit&#39;</span><span class="p">,</span>
+    <span class="p">])</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">println</span><span class="p">(</span><span class="s1">&#39;Main thread: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Context</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Here goes a simple demo of how async could work in Python 3.7+:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">opentelemetry.context</span> <span class="k">import</span> <span class="n">Context</span>
+
+<span class="k">class</span> <span class="nc">Span</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">Context</span><span class="o">.</span><span class="n">current_span</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">(name=</span><span class="si">{}</span><span class="s1">, parent=</span><span class="si">{}</span><span class="s1">)&#39;</span>
+                <span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">,</span>
+                <span class="p">))</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__aenter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">Context</span><span class="o">.</span><span class="n">current_span</span> <span class="o">=</span> <span class="bp">self</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">__aexit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span><span class="p">):</span>
+        <span class="n">Context</span><span class="o">.</span><span class="n">current_span</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">Span</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">Span</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+            <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">Context</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="opentelemetry.context.base_context.html" class="btn btn-neutral float-right" title="opentelemetry.context.base_context module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="OpenTelemetry API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, OpenTelemetry Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

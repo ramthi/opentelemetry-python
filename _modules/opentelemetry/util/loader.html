@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>opentelemetry.util.loader &mdash; OpenTelemetry  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> OpenTelemetry
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../opentelemetry.context.html">opentelemetry.context package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../opentelemetry.metrics.html">opentelemetry.metrics package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../opentelemetry.trace.html">opentelemetry.trace package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../opentelemetry.util.loader.html">opentelemetry.util.loader module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">OpenTelemetry</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>opentelemetry.util.loader</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for opentelemetry.util.loader</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019, OpenTelemetry Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The OpenTelemetry loader module is mainly used internally to load the</span>
+<span class="sd">implementation for global objects like :func:`opentelemetry.trace.tracer`.</span>
+
+<span class="sd">.. _loader-factory:</span>
+
+<span class="sd">An instance of a global object of type ``T`` is always created with a factory</span>
+<span class="sd">function with the following signature::</span>
+
+<span class="sd">    def my_factory_for_t(api_type: typing.Type[T]) -&gt; typing.Optional[T]:</span>
+<span class="sd">        # ...</span>
+
+<span class="sd">That function is called with e.g., the type of the global object it should</span>
+<span class="sd">create as an argument (e.g. the type object</span>
+<span class="sd">:class:`opentelemetry.trace.Tracer`) and should return an instance of that type</span>
+<span class="sd">(such that ``instanceof(my_factory_for_t(T), T)`` is true). Alternatively, it</span>
+<span class="sd">may return ``None`` to indicate that the no-op default should be used.</span>
+
+<span class="sd">When loading an implementation, the following algorithm is used to find a</span>
+<span class="sd">factory function or other means to create the global object:</span>
+
+<span class="sd">    1. If the environment variable</span>
+<span class="sd">       :samp:`OPENTELEMETRY_PYTHON_IMPLEMENTATION_{getter-name}` (e.g.,</span>
+<span class="sd">       ``OPENTELEMETRY_PYTHON_IMPLEMENTATION_TRACER``) is set to an nonempty</span>
+<span class="sd">       value, an attempt is made to import a module with that name and use a</span>
+<span class="sd">       factory function named ``get_opentelemetry_implementation`` in it.</span>
+<span class="sd">    2. Otherwise, the same is tried with the environment</span>
+<span class="sd">       variable ``OPENTELEMETRY_PYTHON_IMPLEMENTATION_DEFAULT``.</span>
+<span class="sd">    3. Otherwise, if a :samp:`set_preferred_{&lt;type&gt;}_implementation` was</span>
+<span class="sd">       called (e.g.</span>
+<span class="sd">       :func:`opentelemetry.trace.set_preferred_tracer_implementation`), the</span>
+<span class="sd">       callback set there is used (that is, the environment variables override</span>
+<span class="sd">       the callback set in code).</span>
+<span class="sd">    4. Otherwise, if :func:`set_preferred_default_implementation` was called,</span>
+<span class="sd">       the callback set there is used.</span>
+<span class="sd">    5. Otherwise, an attempt is made to import and use the OpenTelemetry SDK.</span>
+<span class="sd">    6. Otherwise the default implementation that ships with the API</span>
+<span class="sd">       distribution (a fast no-op implementation) is used.</span>
+
+<span class="sd">If any of the above steps fails (e.g., a module is loaded but does not define</span>
+<span class="sd">the required function or a module name is set but the module fails to load),</span>
+<span class="sd">the search immediatelly skips to the last step.</span>
+
+<span class="sd">Note that the first two steps (those that query environment variables) are</span>
+<span class="sd">skipped if :data:`sys.flags` has ``ignore_environment`` set (which usually</span>
+<span class="sd">means that the Python interpreter was invoked with the ``-E`` or ``-I`` flag).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">TypeVar</span>
+
+<span class="n">_T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;_T&quot;</span><span class="p">)</span>
+
+<span class="c1"># &quot;Untrusted&quot; because this is usually user-provided and we don&#39;t trust the user</span>
+<span class="c1"># to really return a _T: by using object, mypy forces us to check/cast</span>
+<span class="c1"># explicitly.</span>
+<span class="n">_UntrustedImplFactory</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">object</span><span class="p">]]</span>
+
+
+<span class="c1"># This would be the normal ImplementationFactory which would be used to</span>
+<span class="c1"># annotate setters, were it not for https://github.com/python/mypy/issues/7092</span>
+<span class="c1"># Once that bug is resolved, setters should use this instead of duplicating the</span>
+<span class="c1"># code.</span>
+<span class="c1"># ImplementationFactory = Callable[[Type[_T]], Optional[_T]]</span>
+
+<span class="n">_DEFAULT_FACTORY</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[_UntrustedImplFactory[object]]</span>
+
+
+<span class="k">def</span> <span class="nf">_try_load_impl_from_modname</span><span class="p">(</span>
+    <span class="n">implementation_modname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">api_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_T</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">implementation_mod</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">implementation_modname</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ImportError</span><span class="p">,</span> <span class="ne">SyntaxError</span><span class="p">):</span>
+        <span class="c1"># TODO Log/warn</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">_try_load_impl_from_mod</span><span class="p">(</span><span class="n">implementation_mod</span><span class="p">,</span> <span class="n">api_type</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_try_load_impl_from_mod</span><span class="p">(</span>
+    <span class="n">implementation_mod</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">api_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_T</span><span class="p">]:</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Note: We use such a long name to avoid calling a function that is not</span>
+        <span class="c1"># intended for this API.</span>
+
+        <span class="n">implementation_fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
+            <span class="n">implementation_mod</span><span class="p">,</span> <span class="s2">&quot;get_opentelemetry_implementation&quot;</span>
+        <span class="p">)</span>  <span class="c1"># type: _UntrustedImplFactory[_T]</span>
+    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+        <span class="c1"># TODO Log/warn</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">_try_load_impl_from_callback</span><span class="p">(</span><span class="n">implementation_fn</span><span class="p">,</span> <span class="n">api_type</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_try_load_impl_from_callback</span><span class="p">(</span>
+    <span class="n">implementation_fn</span><span class="p">:</span> <span class="n">_UntrustedImplFactory</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">api_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_T</span><span class="p">]:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">implementation_fn</span><span class="p">(</span><span class="n">api_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">api_type</span><span class="p">):</span>
+        <span class="c1"># TODO Warn if wrong type is returned</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># TODO: Warn if implementation_fn returns api_type(): It should return None</span>
+    <span class="c1"># to indicate using the default.</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">_try_load_configured_impl</span><span class="p">(</span>
+    <span class="n">api_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">factory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_UntrustedImplFactory</span><span class="p">[</span><span class="n">_T</span><span class="p">]]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_T</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Attempts to find any specially configured implementation. If none is</span>
+<span class="sd">    configured, or a load error occurs, returns `None`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">implementation_modname</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">ignore_environment</span><span class="p">:</span>
+        <span class="n">implementation_modname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span>
+            <span class="s2">&quot;OPENTELEMETRY_PYTHON_IMPLEMENTATION_&quot;</span> <span class="o">+</span> <span class="n">api_type</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">implementation_modname</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_try_load_impl_from_modname</span><span class="p">(</span>
+                <span class="n">implementation_modname</span><span class="p">,</span> <span class="n">api_type</span>
+            <span class="p">)</span>
+        <span class="n">implementation_modname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span>
+            <span class="s2">&quot;OPENTELEMETRY_PYTHON_IMPLEMENTATION_DEFAULT&quot;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">implementation_modname</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_try_load_impl_from_modname</span><span class="p">(</span>
+                <span class="n">implementation_modname</span><span class="p">,</span> <span class="n">api_type</span>
+            <span class="p">)</span>
+    <span class="k">if</span> <span class="n">factory</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_try_load_impl_from_callback</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">api_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_DEFAULT_FACTORY</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_try_load_impl_from_callback</span><span class="p">(</span><span class="n">_DEFAULT_FACTORY</span><span class="p">,</span> <span class="n">api_type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="c1"># Public to other opentelemetry-api modules</span>
+<span class="k">def</span> <span class="nf">_load_impl</span><span class="p">(</span>
+    <span class="n">api_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">factory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Type</span><span class="p">[</span><span class="n">_T</span><span class="p">]],</span> <span class="n">Optional</span><span class="p">[</span><span class="n">_T</span><span class="p">]]]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_T</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Tries to load a configured implementation, if unsuccessful, returns a</span>
+<span class="sd">    fast no-op implemenation that is always available.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">_try_load_configured_impl</span><span class="p">(</span><span class="n">api_type</span><span class="p">,</span> <span class="n">factory</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">api_type</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<div class="viewcode-block" id="set_preferred_default_implementation"><a class="viewcode-back" href="../../../opentelemetry.util.loader.html#opentelemetry.util.loader.set_preferred_default_implementation">[docs]</a><span class="k">def</span> <span class="nf">set_preferred_default_implementation</span><span class="p">(</span>
+    <span class="n">implementation_factory</span><span class="p">:</span> <span class="n">_UntrustedImplFactory</span><span class="p">[</span><span class="n">_T</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Sets a factory function that may be called for any implementation</span>
+<span class="sd">    object. See the :ref:`module docs &lt;loader-factory&gt;` for more details.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_DEFAULT_FACTORY</span>  <span class="c1"># pylint:disable=global-statement</span>
+    <span class="n">_DEFAULT_FACTORY</span> <span class="o">=</span> <span class="n">implementation_factory</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, OpenTelemetry Authors
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
